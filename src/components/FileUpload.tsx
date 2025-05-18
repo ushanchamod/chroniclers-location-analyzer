@@ -1,20 +1,43 @@
-import type { ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
+import { validateInputFile } from "../utils";
 
 interface FileUploadProps {
-  onFileUpload: (content: string, fileName: string) => void;
+  onFileUpload: (content: string, fileName: string, isValid: boolean) => void;
   isLoading: boolean;
 }
 
 const FileUpload = ({ onFileUpload, isLoading }: FileUploadProps) => {
+  const [error, setError] = useState<string | null>(null);
+
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    setError(null);
     const reader = new FileReader();
+
     reader.onload = (event) => {
-      const content = event.target?.result as string;
-      onFileUpload(content, file.name);
+      try {
+        const content = event.target?.result as string;
+        const validation = validateInputFile(content);
+
+        if (!validation.isValid) {
+          setError(validation.error ?? null);
+          return;
+        }
+
+        onFileUpload(content, file.name, true);
+      } catch (err) {
+        setError("Failed to process file");
+        onFileUpload("", file.name, false);
+      }
     };
+
+    reader.onerror = () => {
+      setError("Error reading file");
+      onFileUpload("", file.name, false);
+    };
+
     reader.readAsText(file);
   };
 
@@ -39,7 +62,6 @@ const FileUpload = ({ onFileUpload, isLoading }: FileUploadProps) => {
             overflow-hidden relative
           `}
         >
-          {/* Gradient background effect */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           {/* Main content */}
@@ -91,7 +113,6 @@ const FileUpload = ({ onFileUpload, isLoading }: FileUploadProps) => {
           />
         </label>
 
-        {/* Loading indicator */}
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/80 z-20 rounded-xl">
             <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" />
@@ -99,12 +120,30 @@ const FileUpload = ({ onFileUpload, isLoading }: FileUploadProps) => {
         )}
       </div>
 
-      {/* File requirements */}
       <div className="mt-3 text-center">
         <p className="text-xs text-gray-500">
           Upload a properly formatted text file with two columns of numbers
         </p>
       </div>
+
+      {error && (
+        <div className="mt-2 text-sm text-red-600 bg-red-50 px-3 py-2 rounded-md">
+          <div className="flex items-center">
+            <svg
+              className="h-4 w-4 mr-1"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clipRule="evenodd"
+              />
+            </svg>
+            {error}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

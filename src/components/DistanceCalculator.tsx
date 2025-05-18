@@ -1,5 +1,3 @@
-// components/DistanceCalculator.tsx
-
 import { calculateDistance } from "../utils";
 
 interface DistanceCalculatorProps {

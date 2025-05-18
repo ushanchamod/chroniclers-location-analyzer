@@ -1,4 +1,3 @@
-// utils/parseInputFile.ts
 export function parseInputFile(content: string): {
   list1: number[];
   list2: number[];

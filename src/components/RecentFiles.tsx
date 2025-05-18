@@ -72,7 +72,6 @@ const RecentFiles = ({ files, onSelect, onRemove }: RecentFilesProps) => {
               </div>
             </div>
 
-            {/* Remove button */}
             <button
               onClick={(e) => handleRemove(e, file.name)}
               className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 bg-red-500 rounded-full shadow-md hover:bg-red-600"

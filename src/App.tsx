@@ -1,4 +1,3 @@
-// App.tsx
 import { useState, useEffect } from "react";
 import type { RecentFile } from "./types";
 import { DistanceCalculator, FileUpload, RecentFiles } from "./components";
@@ -16,7 +15,6 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [recentFiles, setRecentFiles] = useState<RecentFile[]>([]);
 
-  // Load recent files from localStorage on mount
   useEffect(() => {
     const storedFiles = localStorage.getItem(STORAGE_KEY);
     if (storedFiles) {
@@ -72,6 +70,8 @@ const App = () => {
     const updatedFiles = recentFiles.filter((file) => file.name !== fileName);
     setRecentFiles(updatedFiles);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedFiles));
+
+    setData(null);
   };
 
   return (
@@ -97,7 +97,6 @@ const App = () => {
           />
         )}
 
-        {/* Loading and error states remain the same */}
         {isLoading && (
           <div className="mt-4 text-center">
             <p className="text-lg text-gray-500">Processing your file...</p>

@@ -1,4 +1,3 @@
-// types.ts
 export interface RecentFile {
   name: string;
   date: string;

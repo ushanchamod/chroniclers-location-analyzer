@@ -1,4 +1,3 @@
-// utils/validateInputFile.ts
 export const validateInputFile = (
   content: string,
 ): {
@@ -17,7 +16,6 @@ export const validateInputFile = (
   for (const [i, line] of lines.entries()) {
     const parts = line.trim().split(/\s+/);
 
-    // Validate line format
     if (parts.length !== 2) {
       return {
         isValid: false,
@@ -25,7 +23,6 @@ export const validateInputFile = (
       };
     }
 
-    // Validate numbers
     const num1 = Number(parts[0]);
     const num2 = Number(parts[1]);
 
@@ -36,7 +33,6 @@ export const validateInputFile = (
       };
     }
 
-    // Validate number range (example: positive integers)
     if (!Number.isInteger(num1) || !Number.isInteger(num2)) {
       return {
         isValid: false,
@@ -48,7 +44,6 @@ export const validateInputFile = (
     list2.push(num2);
   }
 
-  // Validate minimum rows
   if (list1.length < 2) {
     return {
       isValid: false,
