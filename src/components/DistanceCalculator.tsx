@@ -4,6 +4,29 @@ interface DistanceCalculatorProps {
   data: { list1: number[]; list2: number[]; distance?: number };
 }
 
+/**
+ * DistanceCalculator Component
+ * 
+ * Displays a summary of two numeric location lists and calculates the distance between them. 
+ * Useful for visualizing the size of two datasets and the result of a distance calculation.
+ * 
+ * If a `distance` value is already provided in the `data` prop, it will be used directly.
+ * Otherwise, the distance will be calculated dynamically using the `calculateDistance` utility.
+ * 
+ * @param {Object} props - Props for the component.
+ * @param {{ list1: number[]; list2: number[]; distance?: number }} props.data 
+ *   The input data for distance calculation and display.
+ *   - `list1`: First array of numeric values.
+ *   - `list2`: Second array of numeric values.
+ *   - `distance` (optional): Pre-calculated distance value. If not provided, it will be computed.
+ * 
+ * @returns {JSX.Element} A styled card layout showing the number of locations in each list and the total distance.
+ * 
+ * @example
+ * <DistanceCalculator 
+ *   data={{ list1: [1, 2, 3], list2: [4, 5, 6] }} 
+ * />
+ */
 const DistanceCalculator = ({ data }: DistanceCalculatorProps) => {
   const distance = data.distance || calculateDistance(data.list1, data.list2);
 

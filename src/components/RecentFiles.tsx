@@ -6,6 +6,41 @@ interface RecentFilesProps {
   onRemove: (fileName: string) => void;
 }
 
+/**
+ * RecentFiles Component
+ * 
+ * This component displays a list of recently uploaded files, allowing the user to:
+ * - View the name, upload date, and associated statistics for each file (List 1 count, List 2 count, and distance).
+ * - Select a file by clicking on it, which triggers the `onSelect` callback.
+ * - Remove a file using a delete button, which triggers the `onRemove` callback.
+ * 
+ * Each file is visually represented in a card with hover effects, and file metadata is formatted for readability.
+ * 
+ * @param {Object} props - Props passed to the RecentFiles component.
+ * @param {RecentFile[]} props.files - Array of recently uploaded files, each containing file name, upload date, and statistics.
+ * @param {(file: RecentFile) => void} props.onSelect - Function called when a file is clicked.
+ * @param {(fileName: string) => void} props.onRemove - Function called when a file is removed via the delete button.
+ * 
+ * @returns {JSX.Element} A styled list of recent files with metadata display and interactive controls.
+ * 
+ * @example
+ * <RecentFiles 
+ *   files={[
+ *     {
+ *       name: "data1.txt",
+ *       date: "2024-05-01T10:30:00Z",
+ *       stats: {
+ *         list1Count: 100,
+ *         list2Count: 80,
+ *         distance: 1200
+ *       }
+ *     }
+ *   ]}
+ *   onSelect={(file) => console.log("Selected:", file)}
+ *   onRemove={(fileName) => console.log("Removed:", fileName)}
+ * />
+ */
+
 const RecentFiles = ({ files, onSelect, onRemove }: RecentFilesProps) => {
   const handleRemove = (e: React.MouseEvent, fileName: string) => {
     e.stopPropagation();

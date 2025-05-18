@@ -1,3 +1,41 @@
+/**
+ * Validates and parses the content of a text file containing two columns of integer values.
+ * 
+ * This function performs the following checks:
+ * - Ensures the file is not empty.
+ * - Verifies that each non-empty line contains exactly two values separated by whitespace.
+ * - Confirms both values are valid integers.
+ * - Requires at least two lines of valid data.
+ * 
+ * If validation passes, it returns `isValid: true` along with the parsed data (`list1` and `list2`).
+ * Otherwise, it returns `isValid: false` with a descriptive error message.
+ * 
+ * @param {string} content - The plain text content of the file to validate and parse.
+ * 
+ * @returns {{
+ *   isValid: boolean;
+ *   error?: string;
+ *   parsedData?: { list1: number[]; list2: number[] };
+ * }} 
+ * - `isValid`: Whether the file passed validation.
+ * - `error`: A human-readable message explaining why validation failed (if applicable).
+ * - `parsedData`: The extracted numeric lists (only present if validation succeeds).
+ * 
+ * @example
+ * const result = validateInputFile("1 2\n3 4");
+ * // result = {
+ * //   isValid: true,
+ * //   parsedData: { list1: [1, 3], list2: [2, 4] }
+ * // }
+ * 
+ * @example
+ * const result = validateInputFile("1 two");
+ * // result = {
+ * //   isValid: false,
+ * //   error: "Invalid numbers on line 1: Both values must be numbers"
+ * // }
+ */
+
 export const validateInputFile = (
   content: string,
 ): {

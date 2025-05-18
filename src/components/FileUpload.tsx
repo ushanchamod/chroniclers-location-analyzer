@@ -6,6 +6,43 @@ interface FileUploadProps {
   isLoading: boolean;
 }
 
+/**
+ * FileUpload Component
+ * 
+ * This component provides a styled file input interface for uploading `.txt` files. 
+ * It reads the file content, validates it using a custom `validateInputFile` utility, 
+ * and notifies the parent component of the result via a callback.
+ * 
+ * The component handles:
+ * - File selection (click or drag-and-drop)
+ * - File reading (as plain text)
+ * - Validation of file content
+ * - Visual feedback for loading state and errors
+ * 
+ * @param {Object} props - Props passed to the component.
+ * @param {(content: string, fileName: string, isValid: boolean) => void} props.onFileUpload 
+ *   Function called after file is read and validated.
+ *   - `content`: The content of the file as a string.
+ *   - `fileName`: The name of the uploaded file.
+ *   - `isValid`: Boolean indicating whether the file passed validation.
+ * 
+ * @param {boolean} props.isLoading 
+ *   If true, disables the file input and shows a loading indicator to prevent further uploads.
+ * 
+ * @returns {JSX.Element} A file upload input component with drag-and-drop UI, validation, and error handling.
+ * 
+ * @example
+ * <FileUpload 
+ *   isLoading={false} 
+ *   onFileUpload={(content, fileName, isValid) => {
+ *     if (isValid) {
+ *       // Process the valid file content
+ *     } else {
+ *       // Handle invalid file
+ *     }
+ *   }} 
+ * />
+ */
 const FileUpload = ({ onFileUpload, isLoading }: FileUploadProps) => {
   const [error, setError] = useState<string | null>(null);
 
