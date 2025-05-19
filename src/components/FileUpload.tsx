@@ -131,7 +131,7 @@ const FileUpload = ({ onFileUpload, isLoading }: FileUploadProps) => {
               <p
                 className={`text-sm ${isLoading ? "text-gray-400" : "text-gray-500"}`}
               >
-                {isLoading ? "This may take a moment" : "or drag and drop"}
+                {isLoading ? "This may take a moment" : ""}
               </p>
               <p
                 className={`text-xs mt-2 ${isLoading ? "text-gray-400" : "text-blue-600"}`}

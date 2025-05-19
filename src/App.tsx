@@ -30,7 +30,6 @@ const App = () => {
       const parsedData = parseInputFile(content);
       setData(parsedData);
 
-      // Add to recent files
       const newRecentFile = {
         name: fileName,
         date: new Date().toISOString(),
